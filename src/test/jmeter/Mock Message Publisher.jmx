@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="2.1">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Web Service" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">true</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">true</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Threads" enabled="true">
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <longProp name="ThreadGroup.start_time">1192735910000</longProp>
+        <longProp name="ThreadGroup.end_time">1192735910000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <JMSSampler guiclass="JMSSamplerGui" testclass="JMSSampler" testname="Mock Audit Event Publisher" enabled="true">
+          <stringProp name="TestPlan.comments">Assumes ActiveMQ All JAR in JMeter Lib Directory</stringProp>
+          <stringProp name="JMSSampler.queueconnectionfactory">ConnectionFactory</stringProp>
+          <stringProp name="JMSSampler.SendQueue">AuditEvent</stringProp>
+          <stringProp name="JMSSampler.ReceiveQueue"></stringProp>
+          <boolProp name="JMSSampler.isFireAndForget">true</boolProp>
+          <boolProp name="JMSSampler.isNonPersistent">false</boolProp>
+          <boolProp name="JMSSampler.useReqMsgIdAsCorrelId">false</boolProp>
+          <stringProp name="JMSSampler.timeout"></stringProp>
+          <stringProp name="HTTPSamper.xml_data">&lt;audit-event&gt;
+	&lt;application&gt;Claims&lt;/application&gt;
+	&lt;time&gt;201211201400&lt;/time&gt;
+	&lt;message&gt;Fraud Alert&lt;/message&gt;
+&lt;/audit-event&gt;</stringProp>
+          <stringProp name="JMSSampler.initialContextFactory">org.apache.activemq.jndi.ActiveMQInitialContextFactory</stringProp>
+          <stringProp name="JMSSampler.contextProviderUrl">tcp://localhost:61616</stringProp>
+          <elementProp name="JMSSampler.jndiProperties" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="queue.AuditEvent" elementType="Argument">
+                <stringProp name="Argument.name">queue.AuditEvent</stringProp>
+                <stringProp name="Argument.value">audit.events</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+        </JMSSampler>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>

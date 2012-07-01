@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:util="http://www.springframework.org/schema/util" 
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:jms="http://www.springframework.org/schema/jms"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+        http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-3.0.xsd">
+
+    <context:component-scan base-package="ws.cogito.auditing" />
+    <context:annotation-config/>
+ 
+    <bean id="oxmMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller">
+        <property name="autodetectAnnotations" value="true"/>
+            <property name="aliases">
+	        <map>
+	            <entry key="audit-event" value="ws.cogito.auditing.model.AuditEvent" />
+	            <entry key="audit-events" value="ws.cogito.auditing.model.AuditEvents" />
+	        </map>
+        </property>
+    </bean>
+    
+    <bean id="marshallingHttpMessageConverter"
+        class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
+        <property name="marshaller" ref="oxmMarshaller" />
+        <property name="unmarshaller" ref="oxmMarshaller" />
+    </bean>
+    
+    <bean id="jsonConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+       <property name="supportedMediaTypes" value="application/json" />
+    </bean>    
+    
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <property name="messageConverters">
+            <util:list id="beanList">
+                <ref bean="jsonConverter" />
+                <ref bean="marshallingHttpMessageConverter" />
+            </util:list>
+        </property>
+    </bean>
+    
+    <!-- ActiveMQ Connection Factory -->
+    <bean id="connectionFactory" 
+    class="org.apache.activemq.ActiveMQConnectionFactory" 
+    p:brokerURL="tcp://localhost:61616" />
+    
+    <!-- Message Listener -->
+    <bean id="auditEventListener" class="ws.cogito.auditing.messaging.AuditEventMessageListener"/>
+
+    <!-- The Spring message listener container configuration -->
+    <jms:listener-container
+    container-type="default"
+    connection-factory="connectionFactory"
+    acknowledge="auto">
+        <jms:listener destination="audit.events" ref="auditEventListener" method="onMessage" />
+    </jms:listener-container>    
+    
+</beans>
