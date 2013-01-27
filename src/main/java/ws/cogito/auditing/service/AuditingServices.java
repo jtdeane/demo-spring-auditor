@@ -1,5 +1,6 @@
 package ws.cogito.auditing.service;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import ws.cogito.auditing.model.AuditEvent;
-import ws.cogito.auditing.model.AuditEventURL;
 import ws.cogito.auditing.model.AuditEvents;
 
 /**
@@ -89,26 +89,26 @@ public class AuditingServices {
 	 * @param port
 	 * @param context
 	 * @return AuditEvents
+	 * @throws Exception
 	 */
 	public AuditEvents retrieveAuditEvents (String application, String host, 
-			int port, String context) {
+			int port, String context) throws Exception {
 		
-		List<AuditEventURL> auditEvents = new ArrayList<AuditEventURL>();
+		List<URL> auditEventLocations = new ArrayList<URL>();
 		
 		for (Map.Entry<String,AuditEvent> entry : audits.entrySet()) {
 		    
 		    if (entry.getKey().contains(application)) {
 		    	
-		    	auditEvents.add(new AuditEventURL(host, port, context, 
-		    			entry.getKey()));
+		    	auditEventLocations.add (entry.getValue().getAuditEventLocation(host, port, context));
 		    }	    
 		}
 		
 		if (logger.isDebugEnabled()) {
-			logger.debug("Returning " + auditEvents.size() + " " + 
+			logger.debug("Returning " + auditEventLocations.size() + " " + 
 					application + " audit events");
 		}
 		
-		return new AuditEvents (application, auditEvents);
+		return new AuditEvents (application, auditEventLocations);
 	}
 }

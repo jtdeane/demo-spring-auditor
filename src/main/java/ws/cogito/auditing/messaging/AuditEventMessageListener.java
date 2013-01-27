@@ -1,19 +1,23 @@
 package ws.cogito.auditing.messaging;
 
+import java.io.InputStream;
+
 import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.TextMessage;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Unmarshaller;
 
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 
 import ws.cogito.auditing.model.AuditEvent;
-import ws.cogito.auditing.model.AuditEventURL;
-import ws.cogito.auditing.model.AuditEvents;
 import ws.cogito.auditing.service.AuditingServices;
 
-import com.thoughtworks.xstream.XStream;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 /**
@@ -25,7 +29,20 @@ public class AuditEventMessageListener implements MessageListener {
 	private static final Logger logger = LoggerFactory.getLogger
 			(AuditEventMessageListener.class);
 	
-	private XStream xstream = null;
+	private final ObjectMapper objectMapper;
+	private final JAXBContext jaxbContext;
+	
+	/**
+	 * Default Constructor
+	 * @throws Exception
+	 */
+	public AuditEventMessageListener () throws Exception {
+		
+		objectMapper = new ObjectMapper();
+		jaxbContext = JAXBContext.newInstance(AuditEvent.class);
+	}
+	
+	//private final XmlMapper xmlMapper = new XmlMapper();
 	
 	@Autowired
 	AuditingServices auditingServices;
@@ -33,22 +50,29 @@ public class AuditEventMessageListener implements MessageListener {
 	@Override
 	public void onMessage(Message message) {
 		
+		AuditEvent auditEvent = null;
+		
 		try {
 			
 			TextMessage textMessage = (TextMessage) message;
 			
-			if (logger.isDebugEnabled()) {
-				logger.debug("Audit Event Message ID: " + textMessage.
-						getJMSMessageID());
-			}
+			logger.debug("Audit Event Message ID: " + textMessage.
+					getJMSMessageID());
 			
-			AuditEvent auditEvent = toPOJO(textMessage.getText());
+			String mimeType = textMessage.getStringProperty("mimetype");
+			
+			if (mimeType.equals("application/json")) {
+				
+				auditEvent = jsonToPOJO(textMessage.getText());
+				
+			} else {
+				
+				auditEvent = xmlToPOJO(textMessage.getText());
+			}
 			
 			auditingServices.storeAuditEvent(auditEvent);
 			
-			if (logger.isDebugEnabled()) {
-				logger.debug("Stored audit event:" + auditEvent);
-			}
+			logger.debug("Stored audit event:" + auditEvent);
 			
 		} catch (Exception e) {
 			
@@ -56,30 +80,33 @@ public class AuditEventMessageListener implements MessageListener {
 		}
 		
 	}
-
+	
 	/**
-	 * Converts XML to POJO
+	 * Transrept to POJO from JSON
+	 * @param json
+	 * @return AuditEvent
+	 * @throws Exception
+	 */
+	private AuditEvent jsonToPOJO (String json) throws Exception {
+		
+		logger.debug("Audit Event Payload: " + json);		
+		
+		return (AuditEvent)objectMapper.readValue(json, AuditEvent.class);	
+	}
+	
+	/**
+	 * Transrept to POJO from xml
 	 * @param xml
 	 * @return AuditEvent
 	 * @throws Exception
 	 */
-	private AuditEvent toPOJO (String xml) throws Exception {
+	private AuditEvent xmlToPOJO (String xml) throws Exception {
 		
-		if (xstream == null) {
-			initializeXStream();
-		}
-		
-		return (AuditEvent) xstream.fromXML(xml);
-	}
+		logger.debug("Audit Event Payload: " + xml);
 	
-	/**
-	 * Configure XStream
-	 */
-	private void initializeXStream() {
-		
-    	xstream = new XStream();
-    	xstream.alias("event", AuditEventURL.class);
-    	xstream.alias("audit-event", AuditEvent.class);
-    	xstream.alias("audit-events", AuditEvents.class);
+		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+		InputStream stream = IOUtils.toInputStream (xml);	
+
+		return (AuditEvent) unmarshaller.unmarshal(stream);		
 	}
 }
