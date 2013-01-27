@@ -1,0 +1,3 @@
+SPRING MVC Web Application that exposes RESTFul Web Services with JSON (Jackson) 
+and XML (JAXB) resources representations. It also has a Message Listener that
+requires ActiveMQ.
