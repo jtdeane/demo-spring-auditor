@@ -77,7 +77,6 @@ public final class AuditEvent implements Comparable<AuditEvent>, Serializable {
 		uri.append(host);
 		uri.append(":");
 		uri.append(port);
-		uri.append("/");
 		uri.append(context);
 		uri.append("/audit/event/");
 		uri.append(getAuditEventKey());

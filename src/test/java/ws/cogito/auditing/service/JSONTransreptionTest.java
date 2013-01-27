@@ -48,8 +48,8 @@ public class JSONTransreptionTest {
 		
 		List<URL> auditEventLocations = new ArrayList<URL>();
 		
-		auditEventLocations.add (auditEvent.getAuditEventLocation("localhost",8080, "restlet-auditor"));
-		auditEventLocations.add (auditEvent2.getAuditEventLocation("localhost",8080, "restlet-auditor"));
+		auditEventLocations.add (auditEvent.getAuditEventLocation("localhost",8080, "/spring-auditor"));
+		auditEventLocations.add (auditEvent2.getAuditEventLocation("localhost",8080, "/spring-auditor"));
 		
 		AuditEvents auditEvents = new AuditEvents ("Claims", auditEventLocations);
 		
@@ -75,8 +75,8 @@ public class JSONTransreptionTest {
 		//Test AuditEvents Transreption
 		StringBuffer json = new StringBuffer();
 		json.append("{\"application\":\"Claims\",\"events\":[");
-		json.append("\"http://localhost:8080/restlet-auditor/audit/event/Claims-201110201650\",");
-		json.append("\"http://localhost:8080/restlet-auditor/audit/event/Claims-201210201650\"");
+		json.append("\"http://localhost:8080/spring-auditor/audit/event/Claims-201110201650\",");
+		json.append("\"http://localhost:8080/spring-auditor/audit/event/Claims-201210201650\"");
 		json.append("]}");
 		
 		AuditEvents auditEvents = (AuditEvents)objectMapper.readValue(json.toString(), AuditEvents.class);

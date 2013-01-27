@@ -66,8 +66,8 @@ public class XMLTransreptionTest {
 		
 		List<URL> auditEventLocations = new ArrayList<URL>();
 		
-		auditEventLocations.add (auditEvent.getAuditEventLocation("localhost",8080, "restlet-auditor"));
-		auditEventLocations.add (auditEvent2.getAuditEventLocation("localhost",8080, "restlet-auditor"));
+		auditEventLocations.add (auditEvent.getAuditEventLocation("localhost",8080, "/spring-auditor"));
+		auditEventLocations.add (auditEvent2.getAuditEventLocation("localhost",8080, "/spring-auditor"));
 		
 		AuditEvents auditEvents = new AuditEvents ("Claims", auditEventLocations);		
 
@@ -118,8 +118,8 @@ public class XMLTransreptionTest {
 		
 		StringBuffer xml = new StringBuffer();
 		xml.append("<audit-events application=\"Claims\">");
-		xml.append("<event>http://localhost:8080/restlet-auditor/audit/event/Claims-201110201650</event>");
-		xml.append("<event>http://localhost:8080/restlet-auditor/audit/event/Claims-201210201650</event>");
+		xml.append("<event>http://localhost:8080/spring-auditor/audit/event/Claims-201110201650</event>");
+		xml.append("<event>http://localhost:8080/spring-auditor/audit/event/Claims-201210201650</event>");
 		xml.append("</audit-events>");
 		
 		//Unmarshell to Java
