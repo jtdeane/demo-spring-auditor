@@ -1,0 +1,22 @@
+<audit-events>
+	<audit-event>
+	    <application>Claims</application>
+	    <time>201212201500</time>
+	    <message>Fraud Alert</message>
+	</audit-event>
+    <audit-event>
+        <application>Billing</application>
+        <time>201212231115</time>
+        <message>Notice of Intent to Cancel</message>
+    </audit-event>	
+    <audit-event>
+        <application>Claims</application>
+        <time>201212250915</time>
+        <message>Major Bodily Injury</message>
+    </audit-event>
+    <audit-event>
+        <application>Billing</application>
+        <time>201212310800</time>
+        <message>Credit Score Downgraded</message>
+    </audit-event>    
+</audit-events>

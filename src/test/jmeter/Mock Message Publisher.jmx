@@ -311,6 +311,107 @@
         </ResultCollector>
         <hashTree/>
       </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Batch Event" enabled="false">
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <longProp name="ThreadGroup.start_time">1192735910000</longProp>
+        <longProp name="ThreadGroup.end_time">1192735910000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <JMSSampler guiclass="JMSSamplerGui" testclass="JMSSampler" testname="XML Publisher" enabled="true">
+          <stringProp name="TestPlan.comments">Assumes ActiveMQ All JAR in JMeter Lib Directory</stringProp>
+          <stringProp name="JMSSampler.queueconnectionfactory">ConnectionFactory</stringProp>
+          <stringProp name="JMSSampler.SendQueue">BatchEvents</stringProp>
+          <stringProp name="JMSSampler.ReceiveQueue"></stringProp>
+          <boolProp name="JMSSampler.isFireAndForget">true</boolProp>
+          <boolProp name="JMSSampler.isNonPersistent">false</boolProp>
+          <boolProp name="JMSSampler.useReqMsgIdAsCorrelId">false</boolProp>
+          <stringProp name="JMSSampler.timeout"></stringProp>
+          <stringProp name="HTTPSamper.xml_data">&lt;audit-events&gt;
+	&lt;audit-event&gt;
+	    &lt;application&gt;Claims&lt;/application&gt;
+	    &lt;time&gt;201212201500&lt;/time&gt;
+	    &lt;message&gt;Fraud Alert&lt;/message&gt;
+	&lt;/audit-event&gt;
+    &lt;audit-event&gt;
+        &lt;application&gt;Billing&lt;/application&gt;
+        &lt;time&gt;201212231115&lt;/time&gt;
+        &lt;message&gt;Notice of Intent to Cancel&lt;/message&gt;
+    &lt;/audit-event&gt;	
+    &lt;audit-event&gt;
+        &lt;application&gt;Claims&lt;/application&gt;
+        &lt;time&gt;201212250915&lt;/time&gt;
+        &lt;message&gt;Major Bodily Injury&lt;/message&gt;
+    &lt;/audit-event&gt;
+    &lt;audit-event&gt;
+        &lt;application&gt;Billing&lt;/application&gt;
+        &lt;time&gt;201212310800&lt;/time&gt;
+        &lt;message&gt;Credit Score Downgraded&lt;/message&gt;
+    &lt;/audit-event&gt;    
+&lt;/audit-events&gt;</stringProp>
+          <stringProp name="JMSSampler.initialContextFactory">org.apache.activemq.jndi.ActiveMQInitialContextFactory</stringProp>
+          <stringProp name="JMSSampler.contextProviderUrl">tcp://localhost:61616</stringProp>
+          <elementProp name="JMSSampler.jndiProperties" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="queue.BatchEvents" elementType="Argument">
+                <stringProp name="Argument.name">queue.BatchEvents</stringProp>
+                <stringProp name="Argument.value">batch.events</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="mimetype" elementType="Argument">
+                <stringProp name="Argument.name">mimetype</stringProp>
+                <stringProp name="Argument.value">application/xml</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+        </JMSSampler>
+        <hashTree/>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>true</xml>
+              <fieldNames>false</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+      </hashTree>
     </hashTree>
   </hashTree>
 </jmeterTestPlan>
