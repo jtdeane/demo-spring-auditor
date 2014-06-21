@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jmeterTestPlan version="1.2" properties="2.3" jmeter="2.8 r1393162">
+<jmeterTestPlan version="1.2" properties="2.6" jmeter="2.11 r1554548">
   <hashTree>
     <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Web Service" enabled="true">
       <stringProp name="TestPlan.comments"></stringProp>
@@ -51,12 +51,12 @@
               </elementProp>
             </collectionProp>
           </elementProp>
-          <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-            <collectionProp name="Arguments.arguments">
-              <elementProp name="mimetype" elementType="Argument">
-                <stringProp name="Argument.name">mimetype</stringProp>
-                <stringProp name="Argument.value">application/xml</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
+          <elementProp name="arguments" elementType="JMSProperties">
+            <collectionProp name="JMSProperties.properties">
+              <elementProp name="mimetype" elementType="JMSProperty">
+                <stringProp name="JMSProperty.name">mimetype</stringProp>
+                <stringProp name="JMSProperty.value">application/xml</stringProp>
+                <stringProp name="JMSProperty.type">java.lang.String</stringProp>
               </elementProp>
             </collectionProp>
           </elementProp>
@@ -83,12 +83,12 @@
               </elementProp>
             </collectionProp>
           </elementProp>
-          <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-            <collectionProp name="Arguments.arguments">
-              <elementProp name="mimetype" elementType="Argument">
-                <stringProp name="Argument.name">mimetype</stringProp>
-                <stringProp name="Argument.value">application/json</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
+          <elementProp name="arguments" elementType="JMSProperties">
+            <collectionProp name="JMSProperties.properties">
+              <elementProp name="mimetype" elementType="JMSProperty">
+                <stringProp name="JMSProperty.name">mimetype</stringProp>
+                <stringProp name="JMSProperty.value">application/json</stringProp>
+                <stringProp name="JMSProperty.type">java.lang.String</stringProp>
               </elementProp>
             </collectionProp>
           </elementProp>
@@ -167,12 +167,12 @@
               </elementProp>
             </collectionProp>
           </elementProp>
-          <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-            <collectionProp name="Arguments.arguments">
-              <elementProp name="mimetype" elementType="Argument">
-                <stringProp name="Argument.name">mimetype</stringProp>
-                <stringProp name="Argument.value">application/xml</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
+          <elementProp name="arguments" elementType="JMSProperties">
+            <collectionProp name="JMSProperties.properties">
+              <elementProp name="mimetype" elementType="JMSProperty">
+                <stringProp name="JMSProperty.name">mimetype</stringProp>
+                <stringProp name="JMSProperty.value">application/xml</stringProp>
+                <stringProp name="JMSProperty.type">java.lang.String</stringProp>
               </elementProp>
             </collectionProp>
           </elementProp>
@@ -203,12 +203,12 @@
               </elementProp>
             </collectionProp>
           </elementProp>
-          <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-            <collectionProp name="Arguments.arguments">
-              <elementProp name="mimetype" elementType="Argument">
-                <stringProp name="Argument.name">mimetype</stringProp>
-                <stringProp name="Argument.value">application/xml</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
+          <elementProp name="arguments" elementType="JMSProperties">
+            <collectionProp name="JMSProperties.properties">
+              <elementProp name="mimetype" elementType="JMSProperty">
+                <stringProp name="JMSProperty.name">mimetype</stringProp>
+                <stringProp name="JMSProperty.value">application/xml</stringProp>
+                <stringProp name="JMSProperty.type">java.lang.String</stringProp>
               </elementProp>
             </collectionProp>
           </elementProp>
@@ -235,12 +235,12 @@
               </elementProp>
             </collectionProp>
           </elementProp>
-          <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-            <collectionProp name="Arguments.arguments">
-              <elementProp name="mimetype" elementType="Argument">
-                <stringProp name="Argument.name">mimetype</stringProp>
-                <stringProp name="Argument.value">application/json</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
+          <elementProp name="arguments" elementType="JMSProperties">
+            <collectionProp name="JMSProperties.properties">
+              <elementProp name="mimetype" elementType="JMSProperty">
+                <stringProp name="JMSProperty.name">mimetype</stringProp>
+                <stringProp name="JMSProperty.value">application/json</stringProp>
+                <stringProp name="JMSProperty.type">java.lang.String</stringProp>
               </elementProp>
             </collectionProp>
           </elementProp>
@@ -267,12 +267,12 @@
               </elementProp>
             </collectionProp>
           </elementProp>
-          <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-            <collectionProp name="Arguments.arguments">
-              <elementProp name="mimetype" elementType="Argument">
-                <stringProp name="Argument.name">mimetype</stringProp>
-                <stringProp name="Argument.value">application/json</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
+          <elementProp name="arguments" elementType="JMSProperties">
+            <collectionProp name="JMSProperties.properties">
+              <elementProp name="mimetype" elementType="JMSProperty">
+                <stringProp name="JMSProperty.name">mimetype</stringProp>
+                <stringProp name="JMSProperty.value">application/json</stringProp>
+                <stringProp name="JMSProperty.type">java.lang.String</stringProp>
               </elementProp>
             </collectionProp>
           </elementProp>
@@ -368,12 +368,12 @@
               </elementProp>
             </collectionProp>
           </elementProp>
-          <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-            <collectionProp name="Arguments.arguments">
-              <elementProp name="mimetype" elementType="Argument">
-                <stringProp name="Argument.name">mimetype</stringProp>
-                <stringProp name="Argument.value">application/xml</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
+          <elementProp name="arguments" elementType="JMSProperties">
+            <collectionProp name="JMSProperties.properties">
+              <elementProp name="mimetype" elementType="JMSProperty">
+                <stringProp name="JMSProperty.name">mimetype</stringProp>
+                <stringProp name="JMSProperty.value">application/xml</stringProp>
+                <stringProp name="JMSProperty.type">java.lang.String</stringProp>
               </elementProp>
             </collectionProp>
           </elementProp>
